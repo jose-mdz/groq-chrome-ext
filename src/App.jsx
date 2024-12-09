@@ -35,11 +35,11 @@ export default function App() {
 
 	return (
 		<div className="text-sm text-gray-800 space-y-4">
-			<h3 className="text-lg font-bold">Page Summaries</h3>
+			<h3 className="text-lg font-bold">Page Summariess</h3>
 			<button
 				type="button"
 				onClick={summarizePage}
-				className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
+				className="bg-green-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
 			>
 				{loading ? "Summarizing..." : "Summarize Current Page"}
 			</button>
