@@ -1,3 +1,15 @@
 # Groq Chrome Extension
 
-Let's see how this goes.
+## Dev
+
+```
+pnpm dev
+```
+
+Then go to http://localhost:5173
+
+## Build
+
+```
+pnpm build
+```
