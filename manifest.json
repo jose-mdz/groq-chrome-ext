@@ -1,0 +1,22 @@
+{
+	"manifest_version": 3,
+	"name": "Groq Summary",
+	"version": "1.0",
+	"description": "Shows a summary of the current page or selected text. Also allows you to ask questions about the page.",
+	"permissions": ["activeTab", "scripting", "downloads", "tabs", "storage"],
+	"action": {
+		"default_title": "Groq Summary",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"host_permissions": ["<all_urls>"],
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["contentScript.js"],
+			"run_at": "document_idle"
+		}
+	]
+}
