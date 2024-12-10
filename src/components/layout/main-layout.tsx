@@ -5,6 +5,7 @@ import { useState } from "react";
 export function MainLayout() {
 	const [summary, setSummary] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState<[string, string]>(["", ""]);
 
 	const summarizePage = async () => {
 		setLoading(true);
@@ -14,19 +15,15 @@ export function MainLayout() {
 				currentWindow: true,
 			});
 			const results = await chrome.scripting.executeScript({
-				target: { tabId: tab.id },
-				func: () => window.__PAGE_TEXT_CONTENT__ || "",
+				target: { tabId: tab.id || 0 },
+				func: () => [
+					window.document.body.innerText || "",
+					window.document.getSelection()?.toString() || "",
+				],
 			});
 
-			const pageText = results[0]?.result || "";
-			// Naive summary: first 3 sentences
-			const sentences = pageText
-				.split(".")
-				.map((s) => s.trim())
-				.filter(Boolean);
-			const summaryText =
-				sentences.slice(0, 3).join(". ") + (sentences.length > 3 ? "..." : "");
-			setSummary(summaryText || "No text found.");
+			const [pageText, selectionText] = results[0]?.result || [];
+			setData([pageText, selectionText]);
 		} catch (e) {
 			console.error("Error summarizing:", e);
 			setSummary("An error occurred.");
@@ -40,6 +37,16 @@ export function MainLayout() {
 			<Button onClick={summarizePage}>
 				{loading ? "Summarizing..." : "Summarize Current Page"}
 			</Button>
+			<div>
+				<div className="flex gap-3">
+					<div>Page Text</div>
+					<div>{data[0].length}</div>
+				</div>
+				<div className="flex gap-3">
+					<div>Selection Text</div>
+					<div>{data[1].length}</div>
+				</div>
+			</div>
 			<div className="whitespace-pre-wrap">{summary}</div>
 			<ModeToggle />
 		</div>

@@ -6,7 +6,13 @@
 	"permissions": ["activeTab", "scripting", "downloads", "tabs", "storage"],
 	"action": {
 		"default_title": "Groq Summary",
-		"default_popup": "dist/index.html"
+		"default_popup": "dist/index.html",
+		"default_icon": {
+			"16": "icons/16.png",
+			"32": "icons/32.png",
+			"48": "icons/48.png",
+			"128": "icons/128.png"
+		}
 	},
 	"background": {
 		"service_worker": "src/background.js"
