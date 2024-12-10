@@ -39,7 +39,7 @@ export default function App() {
 			<button
 				type="button"
 				onClick={summarizePage}
-				className="bg-green-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
+				className="bg-orange-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
 			>
 				{loading ? "Summarizing..." : "Summarize Current Page"}
 			</button>
