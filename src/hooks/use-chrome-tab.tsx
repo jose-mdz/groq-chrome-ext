@@ -6,6 +6,11 @@ export function useBrowserTab() {
 
 	useEffect(() => {
 		(async () => {
+			if (!chrome.tabs) {
+				setPageText("a b c d e f");
+				setSelectionText("b c");
+				return;
+			}
 			try {
 				const [tab] = await chrome.tabs.query({
 					active: true,
@@ -22,8 +27,7 @@ export function useBrowserTab() {
 				setPageText(pageText);
 				setSelectionText(selectionText);
 			} catch (e) {
-				setPageText("a b c d e f");
-				setSelectionText("b c");
+				console.error("Error retreving tab text:", e);
 			}
 		})();
 	}, []);

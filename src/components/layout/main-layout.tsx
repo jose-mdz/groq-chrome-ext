@@ -3,7 +3,7 @@ import { SummaryLayout } from "./summary-layout";
 
 export function MainLayout() {
 	return (
-		<div className="text-sm space-y-4 p-3 min-w-[260px] min-h-[300px] font-inter">
+		<div className=" min-w-[260px] min-h-[300px]">
 			<SummaryLayout />
 			<ModeToggle />
 		</div>

@@ -9,6 +9,6 @@ export function formatNumber(number: number) {
 	return number.toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
 
-export async function countTokens(text: string): Promise<number> {
-	return Math.round(text.length / 4);
+export async function countWords(text: string): Promise<number> {
+	return text.split(/\s+/).length;
 }
