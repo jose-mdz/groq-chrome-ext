@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import { Button } from "./components/ui/button";
+import { ThemeProvider } from "./components/theme-provider";
+import { ModeToggle } from "./components/mode-toggle";
 export default function App() {
 	const [summary, setSummary] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -34,16 +36,15 @@ export default function App() {
 	};
 
 	return (
-		<div className="text-sm text-gray-800 space-y-4">
-			<h3 className="text-lg font-bold">Page Summariess</h3>
-			<button
-				type="button"
-				onClick={summarizePage}
-				className="bg-orange-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition"
-			>
-				{loading ? "Summarizing..." : "Summarize Current Page"}
-			</button>
-			<div className="whitespace-pre-wrap">{summary}</div>
-		</div>
+		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+			<div className="text-sm space-y-4 p-3 min-h-[200px]">
+				<h3 className="text-lg font-bold">Summarize</h3>
+				<Button onClick={summarizePage}>
+					{loading ? "Summarizing..." : "Summarize Current Page"}
+				</Button>
+				<div className="whitespace-pre-wrap">{summary}</div>
+				<ModeToggle />
+			</div>
+		</ThemeProvider>
 	);
 }
