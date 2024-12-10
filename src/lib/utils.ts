@@ -12,3 +12,7 @@ export function formatNumber(number: number) {
 export async function countWords(text: string): Promise<number> {
 	return text.split(/\s+/).length;
 }
+
+export function truncateTokens(text: string, maxTokens: number): string {
+	return text.slice(0, maxTokens * 4);
+}

@@ -3,10 +3,13 @@ import { Button } from "../ui/button";
 import { cn, countWords, formatNumber } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Zap, PanelTop, TextSelect, Lightbulb } from "lucide-react";
+import { useGroqSummary } from "@/hooks/use-groq-summary";
 export function SummaryLayout() {
 	const { pageText, selectionText } = useBrowserTab();
 	const [pageTokens, setPageTokens] = useState(0);
 	const [selectionTokens, setSelectionTokens] = useState(0);
+	const [searchText, setSearchText] = useState("");
+	const { summary, isLoading } = useGroqSummary(searchText);
 
 	useEffect(() => {
 		countWords(pageText).then(setPageTokens);
@@ -24,6 +27,7 @@ export function SummaryLayout() {
 					<Button
 						className={cn(" text-xs flex-1 flex flex-col gap-2 h-auto p-3")}
 						variant={"secondary"}
+						onClick={() => setSearchText(pageText)}
 					>
 						<PanelTop size={16} />
 						Page <br /> Summary
@@ -32,6 +36,7 @@ export function SummaryLayout() {
 						<Button
 							className="w-1/2 text-xs flex flex-col gap-2 h-auto p-3"
 							variant={"secondary"}
+							onClick={() => setSearchText(selectionText)}
 						>
 							<TextSelect size={16} />
 							Selection <br /> Summary
@@ -52,7 +57,7 @@ export function SummaryLayout() {
 					</div>
 				)}
 			</div>
-			{!selectionText && (
+			{!summary && !selectionText && (
 				<div className="pt-6 text-xs opacity-70">
 					<div className="flex gap-2 items-center">
 						<Lightbulb size={16} className="shrink-0" />
@@ -63,6 +68,7 @@ export function SummaryLayout() {
 					</div>
 				</div>
 			)}
+			{summary && <div className="pt-6 text-xs opacity-70">{summary}</div>}
 		</div>
 	);
 }
