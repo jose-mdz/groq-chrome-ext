@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { AlignLeft, TypeOutline, Copy, Check } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { CodeBlock } from "./code-block";
 export function ContentBlock({
 	content,
 	noControls,
@@ -61,6 +62,7 @@ export function ContentBlock({
 					<ReactMarkdown
 						remarkPlugins={[remarkGfm]}
 						components={{
+							code: ({ children }) => <CodeBlock content={children} />,
 							h1: ({ children }) => (
 								<h1 className="text-xl font-bold my-3">{children}</h1>
 							),
