@@ -3,6 +3,7 @@ import { useChat } from "@/providers/chat-provider";
 import { ChatMessage } from "./chat-message";
 import { Button } from "@/components/ui/button";
 import { SendHorizontal } from "lucide-react";
+import { useEffect } from "react";
 
 export function ChatComponent() {
 	const {
@@ -18,6 +19,12 @@ export function ChatComponent() {
 		addUserMessage(composingMessage);
 		setComposingMessage("");
 	};
+
+	useEffect(() => {
+		if (messages.length > 0) {
+			window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+		}
+	}, [messages]);
 
 	return (
 		<div>
