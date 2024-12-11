@@ -4,6 +4,7 @@ import { cn, countWords, formatNumber } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Zap, PanelTop, TextSelect, Lightbulb } from "lucide-react";
 import { useGroqSummary } from "@/hooks/use-groq-summary";
+import { ContentBlock } from "../content-block";
 export function SummaryLayout() {
 	const { pageText, selectionText } = useBrowserTab();
 	const [pageTokens, setPageTokens] = useState(0);
@@ -30,7 +31,7 @@ export function SummaryLayout() {
 						onClick={() => setSearchText(pageText)}
 					>
 						<PanelTop size={16} />
-						Page <br /> Summary
+						Page {selectionText && <br />} Summary
 					</Button>
 					{selectionText && (
 						<Button
@@ -68,7 +69,7 @@ export function SummaryLayout() {
 					</div>
 				</div>
 			)}
-			{summary && <div className="pt-6 text-xs opacity-70">{summary}</div>}
+			{summary && <ContentBlock content={summary} className="mt-6" />}
 		</div>
 	);
 }

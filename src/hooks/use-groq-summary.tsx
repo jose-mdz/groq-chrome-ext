@@ -29,7 +29,8 @@ function createMessages(source: string): ChatCompletionMessage[] {
 		},
 		{
 			role: "user",
-			content: "Summarize the text above, in a very concise way.",
+			content:
+				"Summarize the text, in a very concise way, use paragraphs and lists and markdown formatting. Be very concise.",
 		},
 	];
 }
