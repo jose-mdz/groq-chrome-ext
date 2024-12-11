@@ -16,9 +16,22 @@ const [AppNavProvider, useAppNav] = providerFactory(() => {
 		}
 	}, [apiKey]);
 
+	const closeSettings = () => {
+		if (apiKey) {
+			setCurrentView("summary");
+		} else {
+			setCurrentView("key");
+		}
+	};
+
+	const openSettings = () => {
+		setCurrentView("settings");
+	};
+
 	return {
 		currentView,
-		setCurrentView,
+		closeSettings,
+		openSettings,
 	};
 });
 

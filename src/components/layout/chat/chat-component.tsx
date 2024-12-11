@@ -30,14 +30,17 @@ export function ChatComponent() {
 			</div>
 			<form onSubmit={handleSubmit} className="flex gap-2">
 				<Input
-					autoFocus={true}
-					disabled={isLoading}
+					autoFocus
 					placeholder="Ask a question"
 					className="flex-1"
 					value={composingMessage}
 					onChange={(e) => setComposingMessage(e.target.value)}
 				/>
-				<Button variant={"secondary"} size={"icon"} disabled={isLoading}>
+				<Button
+					variant={"secondary"}
+					size={"icon"}
+					disabled={isLoading || !composingMessage}
+				>
 					<SendHorizontal size={16} />
 				</Button>
 			</form>

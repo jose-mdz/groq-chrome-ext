@@ -20,7 +20,7 @@ export function SummaryLayout() {
 
 	return (
 		<div className="bg-background m-2 p-4 rounded-lg">
-			<h3 className="font-montserrat flex  gap-2 justify-center w-full items-center pb-3">
+			<h3 className="font-montserrat text-lg flex  gap-2 justify-center w-full items-center pb-3">
 				<Zap size={16} />
 				<span>Summarize</span>
 			</h3>
@@ -35,7 +35,7 @@ export function SummaryLayout() {
 				<div className="flex gap-2">
 					<Button
 						className={cn(
-							" text-xs flex-1 flex flex-col gap-2 h-auto p-3",
+							" text-sm flex-1 flex flex-col gap-2 h-auto p-3",
 							summarySource === pageText && "opacity-30",
 						)}
 						variant={"secondary"}
@@ -47,7 +47,7 @@ export function SummaryLayout() {
 					{selectionText && (
 						<Button
 							className={cn(
-								"w-1/2 text-xs flex flex-col gap-2 h-auto p-3",
+								"w-1/2 text-sm flex flex-col gap-2 h-auto p-3",
 								summarySource === selectionText && "opacity-30",
 							)}
 							variant={"secondary"}

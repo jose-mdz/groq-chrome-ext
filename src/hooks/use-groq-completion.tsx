@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import Groq from "groq-sdk";
 import type { ChatCompletionMessage } from "@/models";
 import { useSettings } from "@/providers/settings-provider";
@@ -17,7 +17,9 @@ const useGroqChatCompletion = (
 	const [triggerEndOfCompletion, setTriggerEndOfCompletion] =
 		useState<boolean>(false);
 
-	const groq = new Groq({ apiKey, dangerouslyAllowBrowser: true });
+	const groq = useMemo(() => {
+		return new Groq({ apiKey, dangerouslyAllowBrowser: true });
+	}, [apiKey]);
 
 	const fetchChatCompletion = useCallback(
 		async (messages: ChatCompletionMessage[]) => {

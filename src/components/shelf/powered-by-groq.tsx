@@ -3,7 +3,7 @@ import { Settings } from "lucide-react";
 import { useAppNav } from "@/providers/app-nav";
 
 export function PoweredByGroq() {
-	const { currentView, setCurrentView } = useAppNav();
+	const { currentView, openSettings } = useAppNav();
 	return (
 		<div className="relative top-[2px] my-4 h-4 bg-[url('/powered-by-groq.png')] bg-contain bg-center bg-no-repeat">
 			{currentView === "summary" && (
@@ -11,7 +11,7 @@ export function PoweredByGroq() {
 					variant="ghost"
 					size="icon"
 					className="absolute top-[-12px] right-2 opacity-50 hover:opacity-100 hover:bg-background"
-					onClick={() => setCurrentView("settings")}
+					onClick={openSettings}
 				>
 					<Settings className="h-4 w-4" />
 				</Button>

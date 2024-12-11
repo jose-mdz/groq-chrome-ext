@@ -1,6 +1,7 @@
-export const defaultSummarizePrompt = `Summarize the text, in a very concise way, 
-use paragraphs and lists and markdown formatting. 
-Be extremely concise. No more than 3 paragraphs. 
-The paragraphs should be consise with no more than 10 words.`;
+export const defaultSummarizePrompt = `Provide a clear and concise summary of the text.
+Use Markdown formatting with bullet points and paragraphs.
+Focus on key points and main ideas only.
+Keep paragraphs short and impactful, maximum 3 total.
+Aim for clarity and brevity in your summary.`;
 
 export const defaultModel = "llama3-8b-8192";
