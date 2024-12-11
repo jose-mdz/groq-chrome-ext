@@ -6,7 +6,7 @@ import { PromptLayout } from "./prompt-layout";
 export function MainLayout() {
 	const { key } = useGroqKey();
 	return (
-		<div className=" min-w-[260px] ">
+		<div className=" min-w-[375px] ">
 			{key ? <PromptLayout /> : <EnterKeyLayout />}
 			<PoweredByGroq />
 		</div>

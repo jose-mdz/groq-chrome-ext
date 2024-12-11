@@ -1,21 +1,22 @@
-import { useBrowserTab } from "@/hooks/use-chrome-tab";
 import { Button } from "../ui/button";
-import { cn, countWords, formatNumber } from "@/lib/utils";
-import { useState, useEffect } from "react";
-import { Zap, PanelTop, TextSelect, Lightbulb } from "lucide-react";
-import { useGroqSummary } from "@/hooks/use-groq-summary";
+import { cn, formatNumber } from "@/lib/utils";
+import { Zap, PanelTop, TextSelect, Lightbulb, RefreshCcw } from "lucide-react";
 import { ContentBlock } from "../content-block";
-export function SummaryLayout() {
-	const { pageText, selectionText } = useBrowserTab();
-	const [pageTokens, setPageTokens] = useState(0);
-	const [selectionTokens, setSelectionTokens] = useState(0);
-	const [searchText, setSearchText] = useState("");
-	const { summary, isLoading } = useGroqSummary(searchText);
+import { useSummary } from "@/providers/summary-provider";
 
-	useEffect(() => {
-		countWords(pageText).then(setPageTokens);
-		countWords(selectionText).then(setSelectionTokens);
-	}, [pageText, selectionText]);
+export function SummaryLayout() {
+	const {
+		isLoading,
+		summary,
+		pageTokens,
+		selectionTokens,
+		pageText,
+		selectionText,
+		summarySource,
+		setSummarySource,
+		clearSummary,
+		retrySummary,
+	} = useSummary();
 
 	return (
 		<div className="bg-background m-2 p-4 rounded-lg">
@@ -33,18 +34,24 @@ export function SummaryLayout() {
 			<div>
 				<div className="flex gap-2">
 					<Button
-						className={cn(" text-xs flex-1 flex flex-col gap-2 h-auto p-3")}
+						className={cn(
+							" text-xs flex-1 flex flex-col gap-2 h-auto p-3",
+							summarySource === pageText && "opacity-30",
+						)}
 						variant={"secondary"}
-						onClick={() => setSearchText(pageText)}
+						onClick={() => setSummarySource(pageText)}
 					>
 						<PanelTop size={16} />
 						Page {selectionText && <br />} Summary
 					</Button>
 					{selectionText && (
 						<Button
-							className="w-1/2 text-xs flex flex-col gap-2 h-auto p-3"
+							className={cn(
+								"w-1/2 text-xs flex flex-col gap-2 h-auto p-3",
+								summarySource === selectionText && "opacity-30",
+							)}
 							variant={"secondary"}
-							onClick={() => setSearchText(selectionText)}
+							onClick={() => setSummarySource(selectionText)}
 						>
 							<TextSelect size={16} />
 							Selection <br /> Summary
@@ -76,7 +83,29 @@ export function SummaryLayout() {
 					</div>
 				</div>
 			)}
-			{summary && <ContentBlock content={summary} className="mt-6" />}
+			{summary && (
+				<>
+					<ContentBlock content={summary} className="mt-6" />
+					<div className="flex justify-between mt-2 ">
+						<Button
+							size={"sm"}
+							variant={"outline"}
+							className="text-xs  opacity-50 hover:opacity-100"
+							onClick={retrySummary}
+						>
+							<RefreshCcw size={16} />
+						</Button>
+						<Button
+							size={"sm"}
+							variant={"outline"}
+							className="text-xs  opacity-50 hover:opacity-100"
+							onClick={clearSummary}
+						>
+							Clear
+						</Button>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }

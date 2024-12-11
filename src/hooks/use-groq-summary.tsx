@@ -18,7 +18,16 @@ export function useGroqSummary(source: string) {
 		setSummary(response);
 	}, [response]);
 
-	return { summary, isLoading };
+	const clearSummary = () => {
+		setSummary("");
+	};
+
+	const retrySummary = () => {
+		clearSummary();
+		fetchChatCompletion(createMessages(source));
+	};
+
+	return { summary, isLoading, clearSummary, retrySummary };
 }
 
 function createMessages(source: string): ChatCompletionMessage[] {
