@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { errorDescription } from "@/lib/utils";
 
 interface UseGroqChatCompletionProps {
-	onResponse: (response: string) => void;
+	onResponse?: (response: string) => void;
 }
 
 const useGroqChatCompletion = (

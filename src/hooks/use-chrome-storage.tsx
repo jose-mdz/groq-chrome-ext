@@ -108,3 +108,11 @@ export function useChromeStorage<T>({
 
 	return [value, setStoredValue];
 }
+
+export function clearChromeStorage(key: string) {
+	if (typeof chrome !== "undefined" && chrome.storage) {
+		chrome.storage.local.remove(key);
+	} else {
+		window.localStorage.removeItem(key);
+	}
+}

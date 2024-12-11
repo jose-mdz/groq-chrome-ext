@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { useAppNav } from "@/providers/app-nav";
 import { SummaryPrompt } from "./summary-prompt";
 import { DeleteKeyButton } from "./delete-key-button";
+import { ResetAllSettingsButton } from "./reset-settings-button";
 
 export function SettingsLayout() {
 	const { setApiKey } = useSettings();
@@ -18,7 +19,7 @@ export function SettingsLayout() {
 					<X className="w-4 h-4" />
 				</Button>
 			</div>
-			<SettingsSection title="Model">
+			<SettingsSection title="Model" noSeparator>
 				<ModelsCombo />
 			</SettingsSection>
 			<SettingsSection title="Summarize Prompt">
@@ -32,6 +33,13 @@ export function SettingsLayout() {
 				<p>If you want to use a different API key, delete the current key.</p>
 				<DeleteKeyButton />
 			</SettingsSection>
+			<SettingsSection title="Reset All Settings">
+				<p>
+					Reset all settings to their default values. This will delete all
+					custom settings and reset the extension to its initial state.
+				</p>
+				<ResetAllSettingsButton />
+			</SettingsSection>
 		</div>
 	);
 }
@@ -39,13 +47,15 @@ export function SettingsLayout() {
 function SettingsSection({
 	children,
 	title,
+	noSeparator,
 }: {
 	children: React.ReactNode;
 	title: string;
+	noSeparator?: boolean;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<Separator />
+			{!noSeparator && <Separator />}
 			<h2 className="font-montserrat mt-6">{title}</h2>
 			<div className="flex flex-col gap-2 [&>p]:text-sm [&>p]:text-muted-foreground">
 				{children}
