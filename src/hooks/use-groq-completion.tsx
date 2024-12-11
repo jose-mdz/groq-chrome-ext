@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Groq from "groq-sdk";
 import type { ChatCompletionMessage } from "@/models";
-import { useGroqKey } from "./use-groq-key";
+import { useSettings } from "@/providers/settings-provider";
 
 interface UseGroqChatCompletionProps {
 	onResponse: (response: string) => void;
@@ -11,13 +11,13 @@ const useGroqChatCompletion = (
 	opts: UseGroqChatCompletionProps | undefined = undefined,
 ) => {
 	const { onResponse } = opts || {};
-	const { key } = useGroqKey();
+	const { apiKey, currentModel } = useSettings();
 	const [response, setResponse] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [triggerEndOfCompletion, setTriggerEndOfCompletion] =
 		useState<boolean>(false);
 
-	const groq = new Groq({ apiKey: key, dangerouslyAllowBrowser: true });
+	const groq = new Groq({ apiKey, dangerouslyAllowBrowser: true });
 
 	const fetchChatCompletion = useCallback(
 		async (messages: ChatCompletionMessage[]) => {
@@ -27,7 +27,7 @@ const useGroqChatCompletion = (
 			try {
 				const chatCompletion = await groq.chat.completions.create({
 					messages: messages.map(({ id, ...message }) => message),
-					model: "llama3-8b-8192",
+					model: currentModel,
 					temperature: 1,
 					max_tokens: 8192,
 					top_p: 1,
@@ -47,7 +47,7 @@ const useGroqChatCompletion = (
 				setIsLoading(false);
 			}
 		},
-		[groq],
+		[groq, currentModel],
 	);
 
 	useEffect(() => {

@@ -1,13 +1,20 @@
-import { useGroqKey } from "@/hooks/use-groq-key";
-import { EnterKeyLayout } from "./enter-key-layout";
-import { PoweredByGroq } from "../powered-by-groq";
+import { EnterKeyLayout } from "./enter-key/enter-key-layout";
+import { PoweredByGroq } from "../shelf/powered-by-groq";
 import { PromptLayout } from "./prompt-layout";
+import { SettingsLayout } from "./settings/settings-layout";
+import { useAppNav } from "@/providers/app-nav";
 
 export function MainLayout() {
-	const { key } = useGroqKey();
+	const { currentView } = useAppNav();
 	return (
 		<div className=" min-w-[375px] ">
-			{key ? <PromptLayout /> : <EnterKeyLayout />}
+			{currentView === "key" ? (
+				<EnterKeyLayout />
+			) : currentView === "settings" ? (
+				<SettingsLayout />
+			) : (
+				<PromptLayout />
+			)}
 			<PoweredByGroq />
 		</div>
 	);

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { AlignLeft, TypeOutline, Copy, Check } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";

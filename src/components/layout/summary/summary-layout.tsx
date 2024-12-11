@@ -1,8 +1,8 @@
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { cn, formatNumber } from "@/lib/utils";
 import { Zap, PanelTop, TextSelect, Lightbulb, RefreshCcw } from "lucide-react";
-import { ContentBlock } from "../content-block";
 import { useSummary } from "@/providers/summary-provider";
+import { ContentBlock } from "@/components/shelf/content-block";
 
 export function SummaryLayout() {
 	const {

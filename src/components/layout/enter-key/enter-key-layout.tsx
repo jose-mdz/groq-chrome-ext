@@ -1,15 +1,15 @@
-import { useGroqKey } from "@/hooks/use-groq-key";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useSettings } from "@/providers/settings-provider";
 
 export function EnterKeyLayout() {
-	const { key, setKey } = useGroqKey();
-	const [text, setText] = useState(key);
+	const { apiKey, setApiKey } = useSettings();
+	const [text, setText] = useState(apiKey);
 	return (
 		<div className="m-2 p-3 bg-background rounded-lg flex flex-col gap-6">
-			<h2 className="font-montserrat">Enter your Groq API Key</h2>
+			<h2 className="font-montserrat text-lg">Groq API Key</h2>
 			<div className="flex flex-col gap-2">
 				<div className="text-xs opacity-70">
 					This extension requires a Groq API Key:
@@ -20,7 +20,7 @@ export function EnterKeyLayout() {
 					placeholder="Groq API key"
 				/>
 			</div>
-			<Button onClick={() => setKey(text)}>Save</Button>
+			<Button onClick={() => setApiKey(text)}>Save</Button>
 			<Separator />
 			<div className="flex flex-col gap-2 text-xs ">
 				<h2 className=" font-bold">How to get your Groq API key</h2>

@@ -1,4 +1,4 @@
-import { ChatComponent } from "./chat/chat-component";
+import { ChatComponent } from "@/components/layout/chat/chat-component";
 
 export function ChatLayout() {
 	return (

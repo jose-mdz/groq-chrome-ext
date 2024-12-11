@@ -1,7 +1,6 @@
-import { ContentBlock } from "@/components/content-block";
+import { ContentBlock } from "@/components/shelf/content-block";
 import { cn } from "@/lib/utils";
 import type { ChatCompletionMessage } from "@/models";
-import { useSummary } from "@/providers/summary-provider";
 
 export function ChatMessage({
 	message,
