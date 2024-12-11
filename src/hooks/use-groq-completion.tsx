@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import Groq from "groq-sdk";
 import type { ChatCompletionMessage } from "@/models";
 import { useSettings } from "@/providers/settings-provider";
+import { toast } from "sonner";
+import { errorDescription } from "@/lib/utils";
 
 interface UseGroqChatCompletionProps {
 	onResponse: (response: string) => void;
@@ -44,7 +46,11 @@ const useGroqChatCompletion = (
 				}
 				setTriggerEndOfCompletion(true);
 			} catch (error) {
-				console.error("Error fetching chat completion:", error);
+				console.error("Error fetching chat completion:");
+				console.log(error);
+				toast.error("Completion failed", {
+					description: errorDescription(error),
+				});
 			} finally {
 				setIsLoading(false);
 			}

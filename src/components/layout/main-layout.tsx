@@ -3,6 +3,7 @@ import { PoweredByGroq } from "../shelf/powered-by-groq";
 import { PromptLayout } from "./prompt-layout";
 import { SettingsLayout } from "./settings/settings-layout";
 import { useAppNav } from "@/providers/app-nav";
+import { Toaster } from "sonner";
 
 export function MainLayout() {
 	const { currentView } = useAppNav();
@@ -16,6 +17,7 @@ export function MainLayout() {
 				<PromptLayout />
 			)}
 			<PoweredByGroq />
+			<Toaster />
 		</div>
 	);
 }

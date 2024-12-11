@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ThemeProvider } from "./providers/theme-provider";
 import { MainLayout } from "./components/layout/main-layout";
 import { SettingsProvider } from "./providers/settings-provider";
