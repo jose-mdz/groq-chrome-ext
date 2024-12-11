@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { testDocument, testSelection } from "@/test/test-data";
 export function useBrowserTab() {
 	const [pageText, setPageText] = useState("");
 	const [selectionText, setSelectionText] = useState("");
@@ -7,8 +7,8 @@ export function useBrowserTab() {
 	useEffect(() => {
 		(async () => {
 			if (!chrome.tabs) {
-				setPageText("a b c d e f");
-				setSelectionText("b c");
+				setPageText(testDocument);
+				setSelectionText(testSelection);
 				return;
 			}
 			try {

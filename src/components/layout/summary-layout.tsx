@@ -23,6 +23,13 @@ export function SummaryLayout() {
 				<Zap size={16} />
 				<span>Summarize</span>
 			</h3>
+			<div className={cn("relative invisible", isLoading && "visible")}>
+				<div
+					className={cn(
+						"absolute top-0 left-0 h-[2px] bg-[#f55036] animate-loader",
+					)}
+				/>
+			</div>
 			<div>
 				<div className="flex gap-2">
 					<Button

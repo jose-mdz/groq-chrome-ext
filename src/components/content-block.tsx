@@ -45,7 +45,11 @@ export function ContentBlock({
 					</Button>
 				</div>
 			</div>
-			<div className={cn("bg-secondary rounded-lg p-4 pt-1")}>
+			<div
+				className={cn(
+					"bg-secondary rounded-lg p-4 pt-1 text-sm overflow-scroll",
+				)}
+			>
 				{isPlainText ? (
 					<div className={cn("whitespace-pre-wrap")}>{content}</div>
 				) : (
