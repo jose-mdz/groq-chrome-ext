@@ -3,7 +3,7 @@
 	"name": "Groq Summary",
 	"version": "1.0",
 	"description": "Uses Groq to summarize or interact with the content of the current page or selected text.",
-	"permissions": ["activeTab", "scripting", "downloads", "tabs", "storage"],
+	"permissions": ["activeTab", "scripting", "tabs", "storage"],
 	"action": {
 		"default_title": "Groq Summary",
 		"default_popup": "dist/index.html",
@@ -13,15 +13,5 @@
 			"48": "icons/48.png",
 			"128": "icons/128.png"
 		}
-	},
-	"background": {
-		"service_worker": "src/background.js"
-	},
-	"content_scripts": [
-		{
-			"matches": ["<all_urls>"],
-			"js": ["src/contentScript.js"],
-			"run_at": "document_idle"
-		}
-	]
+	}
 }
