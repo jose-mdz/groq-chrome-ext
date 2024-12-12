@@ -32,6 +32,10 @@ const [ChatProvider, useChat] = providerFactory(() => {
 		setTriggerCompletion(true);
 	};
 
+	const clearMessages = () => {
+		setMessages([]);
+	};
+
 	useEffect(() => {
 		if (triggerCompletion) {
 			setTriggerCompletion(false);
@@ -45,6 +49,7 @@ const [ChatProvider, useChat] = providerFactory(() => {
 		isLoading,
 		composingMessage,
 		setComposingMessage,
+		clearMessages,
 	};
 });
 
