@@ -4,6 +4,7 @@ import type { ChatCompletionMessage } from "@/models";
 import { useSettings } from "@/providers/settings-provider";
 import { toast } from "sonner";
 import { errorDescription } from "@/lib/utils";
+import { type GroqUsage, GroqUsageSchema } from "@/models/completion";
 
 interface UseGroqChatCompletionProps {
 	onResponse?: (response: string) => void;
@@ -16,6 +17,7 @@ const useGroqChatCompletion = (
 	const { apiKey, currentModel } = useSettings();
 	const [response, setResponse] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [usage, setUsage] = useState<GroqUsage | null>(null);
 	const [triggerEndOfCompletion, setTriggerEndOfCompletion] =
 		useState<boolean>(false);
 
@@ -27,6 +29,13 @@ const useGroqChatCompletion = (
 		async (messages: ChatCompletionMessage[]) => {
 			setResponse("");
 			setIsLoading(true);
+
+			// biome-ignore lint/suspicious/noExplicitAny: Usage not included in sdk
+			const readUsage = (usage?: any) => {
+				if (usage) {
+					setUsage(GroqUsageSchema.parse(usage));
+				}
+			};
 
 			try {
 				const chatCompletion = await groq.chat.completions.create({
@@ -43,6 +52,12 @@ const useGroqChatCompletion = (
 					setResponse(
 						(prev) => prev + (chunk.choices[0]?.delta?.content || ""),
 					);
+					if (
+						chunk.choices[0]?.finish_reason === "stop" ||
+						chunk.choices[0]?.finish_reason === "length"
+					) {
+						readUsage(chunk.x_groq?.usage);
+					}
 				}
 				setTriggerEndOfCompletion(true);
 			} catch (error) {
@@ -65,7 +80,7 @@ const useGroqChatCompletion = (
 		}
 	}, [triggerEndOfCompletion, response, onResponse]);
 
-	return { response, isLoading, fetchChatCompletion };
+	return { response, isLoading, fetchChatCompletion, usage };
 };
 
 export default useGroqChatCompletion;

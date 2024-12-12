@@ -24,7 +24,8 @@
 		"remark-gfm": "^4.0.0",
 		"sonner": "^1.7.1",
 		"tailwind-merge": "^2.5.5",
-		"tailwindcss-animate": "^1.0.7"
+		"tailwindcss-animate": "^1.0.7",
+		"zod": "^3.24.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",

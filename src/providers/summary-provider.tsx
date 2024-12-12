@@ -14,6 +14,7 @@ const [SummaryProvider, useSummary] = providerFactory(() => {
 		isLoading,
 		clearSummary: clearGroqSummary,
 		retrySummary,
+		usage,
 	} = useGroqSummary(summarySource);
 
 	const clearSummary = () => {
@@ -37,6 +38,7 @@ const [SummaryProvider, useSummary] = providerFactory(() => {
 		selectionText,
 		clearSummary,
 		retrySummary,
+		usage,
 	};
 });
 

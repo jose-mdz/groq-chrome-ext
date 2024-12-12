@@ -25,7 +25,7 @@ export function ModelsCombo() {
 					)}
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="max-h-[200px] overflow-y-auto ">
+			<DropdownMenuContent className="max-h-[300px] overflow-y-auto ">
 				{models.map((model) => (
 					<DropdownMenuItem key={model} onClick={() => setCurrentModel(model)}>
 						{model}

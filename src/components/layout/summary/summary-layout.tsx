@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { cn, formatNumber } from "@/lib/utils";
+import { cn, formatNumber, formatTime } from "@/lib/utils";
 import { Zap, PanelTop, TextSelect, Lightbulb, RefreshCcw } from "lucide-react";
 import { useSummary } from "@/providers/summary-provider";
 import { ContentBlock } from "@/components/shelf/content-block";
@@ -16,13 +16,19 @@ export function SummaryLayout() {
 		setSummarySource,
 		clearSummary,
 		retrySummary,
+		usage,
 	} = useSummary();
+
+	console.log(usage);
 
 	return (
 		<div className="bg-background m-2 p-4 rounded-lg">
-			<h3 className="font-montserrat text-lg flex  gap-2 justify-center w-full items-center pb-3">
+			<h3 className="relative font-montserrat text-lg flex  gap-2 justify-center w-full items-center pt-3 pb-10">
 				<Zap size={16} />
 				<span>Summarize</span>
+				<div className="absolute bottom-[25px] left-[50%] text-xs opacity-30">
+					with groq
+				</div>
 			</h3>
 			<div className={cn("relative invisible", isLoading && "visible")}>
 				<div
@@ -73,12 +79,12 @@ export function SummaryLayout() {
 				)}
 			</div>
 			{!summary && !selectionText && (
-				<div className="pt-6 text-xs opacity-70">
+				<div className="pt-10 opacity-70">
 					<div className="flex gap-2 items-center">
 						<Lightbulb size={16} className="shrink-0" />
 						<span>
-							You can also select text to have an option to summarize the
-							selected text.
+							You can also <span className="bg-blue-700">select text</span> to
+							have an option to summarize the selected text.
 						</span>
 					</div>
 				</div>
@@ -89,16 +95,28 @@ export function SummaryLayout() {
 					<div className="flex justify-between mt-2 ">
 						<Button
 							size={"sm"}
-							variant={"outline"}
-							className="text-xs  opacity-50 hover:opacity-100"
+							variant={"ghost"}
+							className="text-xs  opacity-30 hover:opacity-100"
 							onClick={retrySummary}
 						>
 							<RefreshCcw size={16} />
 						</Button>
+						{usage && (
+							<div className="text-xs flex gap-3 items-center opacity-30">
+								<div className="">{formatTime(usage.total_time)} </div>
+								<Zap size={16} className="text-[#f55036]" />
+								<div className="">
+									{formatNumber(
+										usage.completion_tokens / usage.completion_time,
+									)}{" "}
+									T/s
+								</div>
+							</div>
+						)}
 						<Button
 							size={"sm"}
-							variant={"outline"}
-							className="text-xs  opacity-50 hover:opacity-100"
+							variant={"ghost"}
+							className="text-xs  opacity-30 hover:opacity-100"
 							onClick={clearSummary}
 						>
 							Clear

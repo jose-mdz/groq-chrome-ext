@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
-import { AlignLeft, TypeOutline, Copy, Check } from "lucide-react";
+import { AlignLeft, TypeOutline, Copy, Check, ALargeSmall } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { CodeBlock } from "./code-block";
@@ -36,7 +36,7 @@ export function ContentBlock({
 							size={"icon"}
 							onClick={() => setIsPlainText(false)}
 						>
-							<TypeOutline size={16} />
+							<ALargeSmall size={16} />
 						</Button>
 					</div>
 					<div className="flex gap-2">

@@ -9,6 +9,21 @@ export function formatNumber(number: number) {
 	return number.toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
 
+export /**
+ * Formats a time given in seconds.
+ * If less than a second, it will be displayed in milliseconds with at most 3 digits.
+ *
+ * @param {number} timeInSeconds - Time in seconds.
+ * @returns {string} - Formatted time string.
+ */
+function formatTime(timeInSeconds: number): string {
+	if (timeInSeconds < 1) {
+		const milliseconds = timeInSeconds * 1000;
+		return `${Math.round(milliseconds)}ms`;
+	}
+	return `${timeInSeconds.toFixed(1)}sec`;
+}
+
 export async function countWords(text: string): Promise<number> {
 	return text.split(/\s+/).length;
 }

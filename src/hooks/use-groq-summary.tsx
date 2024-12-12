@@ -5,7 +5,8 @@ import { truncateTokens } from "@/lib/utils";
 
 export function useGroqSummary(source: string) {
 	const [summary, setSummary] = useState<string>("");
-	const { response, isLoading, fetchChatCompletion } = useGroqChatCompletion();
+	const { response, isLoading, fetchChatCompletion, usage } =
+		useGroqChatCompletion();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
@@ -27,7 +28,7 @@ export function useGroqSummary(source: string) {
 		fetchChatCompletion(createMessages(source));
 	};
 
-	return { summary, isLoading, clearSummary, retrySummary };
+	return { summary, isLoading, clearSummary, retrySummary, usage };
 }
 
 function createMessages(source: string): ChatCompletionMessage[] {
