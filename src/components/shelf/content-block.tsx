@@ -57,12 +57,14 @@ export function ContentBlock({
 				)}
 			>
 				{isPlainText ? (
-					<div className={cn("whitespace-pre-wrap, py-3")}>{content}</div>
+					<div className={cn("whitespace-pre-wrap py-3")}>{content}</div>
 				) : (
 					<ReactMarkdown
 						remarkPlugins={[remarkGfm]}
 						components={{
-							code: ({ children }) => <CodeBlock content={children} />,
+							code: ({ children, ...rest }) => (
+								<CodeBlock content={children} {...rest} />
+							),
 							h1: ({ children }) => (
 								<h1 className="text-xl font-bold my-3">{children}</h1>
 							),
@@ -72,7 +74,7 @@ export function ContentBlock({
 							h3: ({ children }) => (
 								<h3 className="text-bold my-3">{children}</h3>
 							),
-							p: ({ children }) => <p className="my-3">{children}</p>,
+							p: ({ children }) => <div className="my-3">{children}</div>,
 						}}
 					>
 						{content}

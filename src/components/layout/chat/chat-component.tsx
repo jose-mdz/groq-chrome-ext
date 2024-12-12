@@ -38,13 +38,19 @@ export function ChatComponent() {
 
 	return (
 		<div>
-			<div className="flex flex-col">
-				{messages
-					.filter((m) => m.role !== "system")
-					.map((message, index) => (
-						<ChatMessage key={message.id} message={message} className="mb-2" />
-					))}
-			</div>
+			{messages.length > 0 && (
+				<div className="flex flex-col mb-3">
+					{messages
+						.filter((m) => m.role !== "system")
+						.map((message, index) => (
+							<ChatMessage
+								key={message.id}
+								message={message}
+								className="mb-2"
+							/>
+						))}
+				</div>
+			)}
 			<form onSubmit={handleSubmit} className="flex gap-2">
 				<Input
 					autoFocus
@@ -65,14 +71,14 @@ export function ChatComponent() {
 				<div className="flex gap-2 justify-center pt-4">
 					<Button
 						variant={"link"}
-						className="underline px-2 opacity-30 hover:opacity-100"
+						className="underline px-2 opacity-20 hover:opacity-100"
 						onClick={clearMessages}
 					>
 						Clear
 					</Button>
 					<Button
 						variant={"link"}
-						className="underline px-2 opacity-30 hover:opacity-100"
+						className="underline px-2 opacity-20 hover:opacity-100"
 						onClick={copyConversation}
 					>
 						Copy Conversation

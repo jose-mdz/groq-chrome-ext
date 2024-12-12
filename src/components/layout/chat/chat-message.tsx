@@ -24,7 +24,7 @@ export function ChatMessage({
 			<ContentBlock
 				content={content}
 				noControls={role === "user"}
-				className="max-w-[90%]"
+				className="max-w-[95%]"
 			/>
 		</div>
 	);
