@@ -10,7 +10,7 @@ import { ChevronDown, Loader2 } from "lucide-react";
 import { useSettings } from "@/providers/settings-provider";
 
 export function ModelsCombo() {
-	const { models, isLoading, reloadModels } = useGroqModels();
+	const { models, isLoading } = useGroqModels();
 	const { currentModel, setCurrentModel } = useSettings();
 
 	return (

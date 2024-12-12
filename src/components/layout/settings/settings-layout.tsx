@@ -9,7 +9,6 @@ import { DeleteKeyButton } from "./delete-key-button";
 import { ResetAllSettingsButton } from "./reset-settings-button";
 
 export function SettingsLayout() {
-	const { setApiKey } = useSettings();
 	const { closeSettings } = useAppNav();
 	return (
 		<div className="m-2 p-3 bg-background rounded-lg flex flex-col gap-6">

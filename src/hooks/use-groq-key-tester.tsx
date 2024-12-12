@@ -1,5 +1,5 @@
 import Groq from "groq-sdk";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 export function useGroqKeyTester() {
 	const [isTesting, setIsTesting] = useState(false);
