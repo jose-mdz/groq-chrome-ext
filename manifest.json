@@ -3,7 +3,7 @@
 	"name": "Groq Summary",
 	"version": "1.0",
 	"description": "Uses Groq to summarize or interact with the content of the current page or selected text.",
-	"permissions": ["activeTab", "scripting", "tabs", "storage"],
+	"permissions": ["activeTab", "scripting", "storage"],
 	"action": {
 		"default_title": "Groq Summary",
 		"default_popup": "dist/index.html",
