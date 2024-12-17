@@ -8,10 +8,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Loader2 } from "lucide-react";
 import { useSettings } from "@/providers/settings-provider";
+import { useEffect } from "react";
 
 export function ModelsCombo() {
-	const { models, isLoading } = useGroqModels();
+	const { models = [], isLoading } = useGroqModels();
 	const { currentModel, setCurrentModel } = useSettings();
+
+	// If the current model is not in the list of models, set the current model to the first model in the list
+	useEffect(() => {
+		if (
+			models.length > 0 &&
+			!models.filter((model) => model.id === currentModel).length
+		) {
+			setCurrentModel(models[0].id);
+		}
+	}, [models, currentModel, setCurrentModel]);
 
 	return (
 		<DropdownMenu>
@@ -27,8 +38,11 @@ export function ModelsCombo() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="max-h-[300px] overflow-y-auto ">
 				{models.map((model) => (
-					<DropdownMenuItem key={model} onClick={() => setCurrentModel(model)}>
-						{model}
+					<DropdownMenuItem
+						key={model.id}
+						onClick={() => setCurrentModel(model.id)}
+					>
+						{model.id}
 					</DropdownMenuItem>
 				))}
 			</DropdownMenuContent>

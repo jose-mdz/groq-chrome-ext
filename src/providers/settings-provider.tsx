@@ -6,7 +6,13 @@ import { providerFactory } from "./provider-factory";
 import { defaultModel, defaultSummarizePrompt } from "@/lib/defaults";
 import { toast } from "sonner";
 
-const settings = ["groq-key", "summarize-prompt", "current-model"];
+const settings = [
+	"groq-key",
+	"summarize-prompt",
+	"current-model",
+	"use-chunking",
+	"chunk-word-limit",
+];
 type Setting = (typeof settings)[number];
 
 const [SettingsProvider, useSettings] = providerFactory(() => {
@@ -20,6 +26,13 @@ const [SettingsProvider, useSettings] = providerFactory(() => {
 	const [currentModel, setCurrentModel] = useSetting(
 		"current-model",
 		defaultModel,
+	);
+
+	const [useChunking, setUseChunking] = useSetting("use-chunking", "false");
+
+	const [chunkWordLimit, setChunkWordLimit] = useSetting(
+		"chunk-word-limit",
+		"6000",
 	);
 
 	const resetAllSettings = () => {
@@ -39,6 +52,12 @@ const [SettingsProvider, useSettings] = providerFactory(() => {
 
 		currentModel,
 		setCurrentModel,
+
+		useChunking,
+		setUseChunking,
+
+		chunkWordLimit,
+		setChunkWordLimit,
 
 		resetAllSettings,
 	};

@@ -80,3 +80,33 @@ function extractJsonObject(input: string): any | null {
 	// console.error("Incomplete JSON structure");
 	return null;
 }
+
+// Function to divide the text into manageable chunks
+export function chunkText(text: string, maxTokens: number): string[] {
+	const words = text.split(" ");
+	const chunks: string[] = [];
+	let currentChunk: string[] = [];
+	let currentLength = 0;
+
+	for (const word of words) {
+		const wordLength = word.length + 1; // Account for the space
+		if (currentLength + wordLength > maxTokens) {
+			chunks.push(currentChunk.join(" "));
+			currentChunk = [word];
+			currentLength = wordLength;
+		} else {
+			currentChunk.push(word);
+			currentLength += wordLength;
+		}
+	}
+
+	if (currentChunk.length > 0) {
+		chunks.push(currentChunk.join(" "));
+	}
+
+	return chunks;
+}
+
+export function modelNamePassesFilter(model: string): boolean {
+	return !model.includes("whisper");
+}

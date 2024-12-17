@@ -7,6 +7,7 @@ import { useAppNav } from "@/providers/app-nav";
 import { SummaryPrompt } from "./summary-prompt";
 import { DeleteKeyButton } from "./delete-key-button";
 import { ResetAllSettingsButton } from "./reset-settings-button";
+import { TruncateSlider } from "./truncate-slider";
 
 export function SettingsLayout() {
 	const { closeSettings } = useAppNav();
@@ -27,6 +28,14 @@ export function SettingsLayout() {
 					useful if you want to change the way the summary is generated.
 				</p>
 				<SummaryPrompt />
+			</SettingsSection>
+			<SettingsSection title="Truncate Words">
+				<p>
+					Text is truncated to stay within model limits while still providing
+					meaningful summaries. You can adjust the word limit to balance between
+					summary completeness and processing speed.
+				</p>
+				<TruncateSlider />
 			</SettingsSection>
 			<SettingsSection title="API Key">
 				<p>If you want to use a different API key, delete the current key.</p>

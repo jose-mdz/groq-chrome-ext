@@ -1,32 +1,49 @@
+import { modelNamePassesFilter } from "@/lib/utils";
 import { useSettings } from "@/providers/settings-provider";
 import Groq from "groq-sdk";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import useSWR, { mutate } from "swr";
 
 export function useGroqModels() {
 	const { apiKey } = useSettings();
-	const [models, setModels] = useState<string[]>([]);
 
 	const groq = useMemo(() => {
 		return new Groq({ apiKey, dangerouslyAllowBrowser: true });
 	}, [apiKey]);
 
-	const [isLoading, setIsLoading] = useState(true);
+	const reloadModels = () => mutate("models");
 
-	const fetchModels = useCallback(async () => {
-		if (!apiKey) return;
-		setIsLoading(true);
-		const models = await groq.models.list();
-		setModels(models.data.map((model) => model.id));
-		setIsLoading(false);
-	}, [groq, apiKey]);
+	const { data: models, isLoading } = useSWR(
+		apiKey ? "models" : null,
+		async () => {
+			if (!apiKey) return;
+			const models = await groq.models.list();
+			return models.data.filter((model) => modelNamePassesFilter(model.id));
+		},
+	);
+
+	const getContextWindow = useCallback(
+		(model: string) => {
+			return (
+				(
+					models?.find((m) => m.id === model) as Groq.Models.Model & {
+						context_window?: number;
+					}
+				)?.context_window || 8000
+			);
+		},
+		[models],
+	);
 
 	useEffect(() => {
-		fetchModels();
-	}, [fetchModels]);
+		if (!apiKey) return;
+		mutate("models");
+	}, [apiKey]);
 
 	return {
 		models,
 		isLoading,
-		reloadModels: fetchModels,
+		reloadModels,
+		getContextWindow,
 	};
 }

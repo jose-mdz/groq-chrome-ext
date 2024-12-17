@@ -19,8 +19,6 @@ export function SummaryLayout() {
 		usage,
 	} = useSummary();
 
-	console.log(usage);
-
 	return (
 		<div className="bg-background m-2 p-4 rounded-lg">
 			<h3 className="relative font-montserrat text-lg flex  gap-2 justify-center w-full items-center pt-3 pb-10">
@@ -78,6 +76,7 @@ export function SummaryLayout() {
 					</div>
 				)}
 			</div>
+
 			{!summary && !selectionText && (
 				<div className="pt-10 opacity-70">
 					<div className="flex gap-2 items-center">
@@ -103,11 +102,11 @@ export function SummaryLayout() {
 						</Button>
 						{usage && (
 							<div className="text-xs flex gap-3 items-center opacity-30">
-								<div className="">{formatTime(usage.total_time)} </div>
+								<div className="">{formatTime(usage.total_time || 0)} </div>
 								<Zap size={16} className="text-[#f55036]" />
 								<div className="">
 									{formatNumber(
-										usage.completion_tokens / usage.completion_time,
+										usage.completion_tokens / (usage.completion_time || 1),
 									)}{" "}
 									T/s
 								</div>
