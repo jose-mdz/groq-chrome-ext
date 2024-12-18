@@ -1,4 +1,4 @@
-# Groq Chrome Extension
+# Groq Summary Chrome Extension
 
 ## Overview
 The Groq Chrome Extension is a powerful tool designed to enhance your web browsing experience by summarizing content from websites using Groq. With this extension, you can:
