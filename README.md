@@ -17,7 +17,6 @@ The Groq Chrome Extension is a powerful tool designed to enhance your web browsi
 
 ## Setup Requirements
 To use this extension, you must provide a Groq API key. The key will be securely stored in the extension's local storage for authentication purposes.
-To use this extension, you must provide a Groq API key. The key will be securely stored in the extension's local storage for authentication purposes.
 
 ## Key Features
 - **React-Based**: Built using the React library for a modern and efficient user interface.
