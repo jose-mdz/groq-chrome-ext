@@ -36,17 +36,6 @@ To set up and run the extension locally for development:
    ```
    http://localhost:5173
    ```
-To set up and run the extension locally for development:
-
-1. Install dependencies and start the development server:
-   ```bash
-   pnpm dev
-   ```
-
-2. Open your browser and navigate to:
-   ```
-   http://localhost:5173
-   ```
 
 ## Building for Production
 To build the extension for production:
@@ -60,15 +49,3 @@ To build the extension for production:
    ```
    dist/index.html
    ```
-To build the extension for production:
-
-1. Run the build command:
-   ```bash
-   pnpm build
-   ```
-
-2. The extension popup will be available at:
-   ```
-   dist/index.html
-   ```
-
