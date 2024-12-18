@@ -17,7 +17,6 @@ The Groq Chrome Extension is a powerful tool designed to enhance your web browsi
 
 ## Setup Requirements
 To use this extension, you must provide a Groq API key. The key will be securely stored in the extension's local storage for authentication purposes.
-To use this extension, you must provide a Groq API key. The key will be securely stored in the extension's local storage for authentication purposes.
 
 ## Key Features
 - **React-Based**: Built using the React library for a modern and efficient user interface.
@@ -26,17 +25,6 @@ To use this extension, you must provide a Groq API key. The key will be securely
 - **Hot Reload**: Supports hot reloading during development when running `pnpm dev` for seamless coding.
 
 ## Development Setup
-To set up and run the extension locally for development:
-
-1. Install dependencies and start the development server:
-   ```bash
-   pnpm dev
-   ```
-
-2. Open your browser and navigate to:
-   ```
-   http://localhost:5173
-   ```
 To set up and run the extension locally for development:
 
 1. Install dependencies and start the development server:
@@ -61,15 +49,3 @@ To build the extension for production:
    ```
    dist/index.html
    ```
-To build the extension for production:
-
-1. Run the build command:
-   ```bash
-   pnpm build
-   ```
-
-2. The extension popup will be available at:
-   ```
-   dist/index.html
-   ```
-
