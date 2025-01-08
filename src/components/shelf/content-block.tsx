@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { AlignLeft, Copy, Check, ALargeSmall } from "lucide-react";
-import remarkGfm from "remark-gfm";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { CodeBlock } from "./code-block";
+import { MarkdownBlock } from "./markdown-block";
 export function ContentBlock({
 	content,
 	noControls,
@@ -59,26 +57,7 @@ export function ContentBlock({
 				{isPlainText ? (
 					<div className={cn("whitespace-pre-wrap py-3")}>{content}</div>
 				) : (
-					<ReactMarkdown
-						remarkPlugins={[remarkGfm]}
-						components={{
-							code: ({ children, ...rest }) => (
-								<CodeBlock content={children} {...rest} />
-							),
-							h1: ({ children }) => (
-								<h1 className="text-xl font-bold my-3">{children}</h1>
-							),
-							h2: ({ children }) => (
-								<h2 className="text-lg my-3">{children}</h2>
-							),
-							h3: ({ children }) => (
-								<h3 className="text-bold my-3">{children}</h3>
-							),
-							p: ({ children }) => <div className="my-3">{children}</div>,
-						}}
-					>
-						{content}
-					</ReactMarkdown>
+					<MarkdownBlock>{content}</MarkdownBlock>
 				)}
 			</div>
 		</div>
